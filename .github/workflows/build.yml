@@ -44,9 +44,13 @@ jobs:
       run: |
         echo "BUILD_DATE='\"$(TZ=Asia/Jakarta date '+%b %d %Y')\"'" >> $GITHUB_ENV
 
-    - name: KernelSU
+    - name: 🥷 Implant NoMount
+      run: curl https://raw.githubusercontent.com/maxsteeel/nomount/refs/heads/dev/kernel/setup.sh | bash -
+
+    - name: 📥 Setup KernelSU-Next
+      if: ${{ matrix.build_type == 'KSU' || matrix.build_type == 'KSU-OEM' }}
       run: |
-        git submodule update --init --recursive 
+        curl -LSs "https://raw.githubusercontent.com/manipvlator/KernelSU-Next/stable/kernel/setup.sh" | bash -s syscall
 
     - name: 📱 Patch Panel Dimensions
       shell: bash
