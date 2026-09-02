@@ -26,7 +26,6 @@
 #ifdef CONFIG_NOMOUNT
 extern int nomount_handle_iterate_dir(struct file *file, struct dir_context *ctx);
 #endif
-
 int iterate_dir(struct file *file, struct dir_context *ctx)
 {
 	struct inode *inode = file_inode(file);
